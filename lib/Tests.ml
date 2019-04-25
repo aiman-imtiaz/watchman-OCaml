@@ -104,4 +104,9 @@ let%test _ =
   done;
   true
   
-
+let%test _ = 
+  let p = 
+    [Point (0., 0.); Point (6., 0.); Point (6., 1.); 
+     Point (8., 1.); Point (8., 2.); Point (6., 2.); 
+     Point (6., 3.); Point (0., 3.)] in
+  point_within_polygon p @@ Point (1.,1.)
