@@ -294,8 +294,27 @@ let neighbours_on_different_sides ray pol p =
 
 (* Point within a polygon *)
 
+let choose_ray_angle pol = 
+  let edge_angles = 
+    edges pol |>
+    List.map (fun (Point (x1, y1), Point (x2, y2)) -> 
+        let dx = x2 -. x1 in
+        let dy = y1 -. y1 in 
+        atan2 dy dx) in
+  let n = List.length pol in
+  let candidate_angles = 
+    Week_03.iota (n + 1) |>
+    List.map (fun i -> 
+      (float_of_int i) *. pi /. (float_of_int n)) in
+  let phi = List.find (fun c ->  List.for_all 
+                          (fun a -> not (a =~= c)) 
+                          edge_angles) candidate_angles in
+  phi
+      
+                    
+
 let point_within_polygon pol p = 
-  let ray = (p, 0.) in
+  let ray = (p, (choose_ray_angle pol)) in
   let es = edges pol in
   if List.mem p pol ||
      List.exists (fun e -> point_on_segment e p) es then true
