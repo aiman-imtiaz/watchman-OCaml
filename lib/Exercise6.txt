@@ -1,0 +1,3 @@
+The code for exercise 6 can be found in runners folder. The file name is demo.ml
+
+In order to start the game, first, you need to run make clean && make. Then, you need to execute ./bin/demo 

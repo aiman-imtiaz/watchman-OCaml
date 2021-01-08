@@ -54,39 +54,10 @@ let draw_point ?color:(color = Graphics.black) (Point (x, y)) =
   moveto a b;
   set_color black
 
-(*
-
-TODO: Draw a point
-
-*)
-
-(* Some test points *)
-module TestPoints = struct
-
-  let p = Point (100., 150.)
-  let q = Point (-50., 75.)
-  let r = Point (50., 30.)
-  let s = Point (75., 60.)
-  let t = Point (75., 90.)
-
-end
-
 (* Move the point *)
 let (++) (Point (x, y)) (dx, dy) = 
   Point (x +. dx, y +. dy)
 
-
-
-(*
-
-TODO:
-- Draw multiple points.
-- Draw a line.
-- Draw a triangle.
-
-*)
-
-    
 (************************************)
 (*        Point as a vector         *)
 (************************************)
@@ -109,13 +80,6 @@ let (--) (Point (x1, y1)) (Point (x2, y2)) =
 (***************************************)
 (* Scalar product and its applications *)
 (***************************************)
-
-(*
-
-* Question: 
-  What is the graphical interpretation of the dot-product?
-
-*)
 
 let dot_product (Point (x1, y1)) (Point (x2, y2)) = 
   x1 *. x2 +. y1 *. y2
@@ -180,11 +144,6 @@ let dir_clock p1 p2 =
   let prod = cross_product p1 p2 in 
   sign prod
 
-(*
-
-TODO: Determine the direction to rotate a point.
-
-*)
 
 let rotate_to p1 p2 = 
   let a = angle_between p1 p2 in
@@ -202,11 +161,6 @@ let rotate_to p1 p2 =
 let direction p0 p1 p2 = 
   cross_product (p2 -- p0) (p1 -- p0) |> sign
 
-(*
-TODO: 
-experiment with directions.
-
-*)
       
 (******************************************)
 (*    Segments and operations on them     *)
@@ -219,8 +173,6 @@ let draw_segment ?color:(color = Graphics.black) (a, b) =
   let open Graphics in 
   let (Point (ax, ay)) = a in
   let (Point (bx, by)) = b in
-  draw_point ~color:color a;
-  draw_point ~color:color b;
   let iax = int_of_float ax + fst origin in
   let iay = int_of_float ay + snd origin in
   moveto iax iay;
@@ -230,17 +182,6 @@ let draw_segment ?color:(color = Graphics.black) (a, b) =
   lineto ibx iby;
   go_to_origin ()
 
-
-module TestSegments = struct
-  include TestPoints
-  let s0 = (q, p)
-  let s1 = (p, s)
-  let s2 = (r, s)
-  let s3 = (r, t)
-  let s4 = (t, p)
-  let s5 = (Point (-100., -100.), Point (100., 100.))
-  let s6 = (Point (-100., 100.), Point (100., -100.))
-end
 
 (*****************************************)
 (*  Generating random points on segments *)
@@ -364,17 +305,3 @@ let find_intersection s1 s2 =
     let Point (rx, ry) = r in
     let p = p1 ++ (rx *. t, ry *. t) in
     Some p
-
-(* 
-
-TODO: 
-Fun with intersections and random segments on a plot
-
-let s1 = (Point (113.756053827471192, -175.292497988606272),
- Point (18.0694083766823042, 124.535770332375932));;
-
-let s2 = (Point (59.0722072343553464, -171.91124390306868),
-   Point (139.282462974003465, 20.2804812244832249));;
-
-*)
-

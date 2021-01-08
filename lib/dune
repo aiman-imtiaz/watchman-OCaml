@@ -4,5 +4,5 @@
   (inline_tests)                
   (preprocess (pps ppx_inline_test ppx_expect))
   (wrapped false)
-  (libraries graphics ysc2229-part-one batteries) 
+  (libraries graphics ysc2229-part-one ysc2229-part-two batteries) 
   (synopsis "Elementary algorithms of Computational Geometry"))
